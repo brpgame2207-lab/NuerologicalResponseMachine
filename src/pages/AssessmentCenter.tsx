@@ -246,8 +246,12 @@ const VisualReflexModule: React.FC<ModuleProps> = ({ addAttempt, getPerformanceC
           `}
         >
           {phase === 'idle' && (
-            <div className="space-y-3 pointer-events-none">
+            <div className="space-y-4 pointer-events-none text-center max-w-xs mx-auto">
               <span className="text-xs font-mono text-[#00E5FF] block tracking-wider font-extrabold">SYSTEM CALIBRATED</span>
+              <div className="text-[10px] leading-relaxed text-slate-300 font-semibold border-2 border-black bg-[#1c1c24] p-3 font-mono shadow-[3px_3px_0px_#000] text-left">
+                <span className="text-[#00E5FF] font-black block mb-1">INSTRUCTIONS:</span>
+                Click below to begin. The screen will turn red. Wait patiently until the screen flashes <span className="text-[#00FF88] font-bold">GREEN</span>, then click anywhere on the panel as fast as possible. Clicking early will cause a misfire.
+              </div>
               <button 
                 onClick={(e) => { e.stopPropagation(); handleStartTest(); }}
                 className="neo-btn neo-btn-cyan px-6 py-2.5 shadow-[4px_4px_0px_#000000] text-xs pointer-events-auto hover:translate-x-[1px] hover:translate-y-[1px] active:translate-x-[3px] active:translate-y-[3px]"
@@ -566,9 +570,13 @@ const MemoryTileModule: React.FC<{ addAttempt: (attempt: any) => void }> = ({ ad
           {/* Prompt overlays */}
           {gameState === 'idle' && (
             <div className="absolute inset-0 bg-[#0c0c0e]/95 flex flex-col items-center justify-center space-y-4 rounded-none border-[3px] border-black shadow-[4px_4px_0px_#000] p-6 z-20">
-              <Grid className="h-10 w-10 text-purple-400 animate-pulse" />
-              <div className="text-center space-y-3">
+              <Grid className="h-8 w-8 text-purple-400 animate-pulse" />
+              <div className="text-center space-y-3 max-w-xs">
                 <span className="text-xs font-mono text-slate-400 block font-bold tracking-widest">GRID MEMORY ACTIVE</span>
+                <div className="text-[10px] leading-relaxed text-slate-300 font-semibold border-2 border-black bg-[#1c1c24] p-3 font-mono shadow-[3px_3px_0px_#000] text-left">
+                  <span className="text-[#A855F7] font-black block mb-1">INSTRUCTIONS:</span>
+                  A sequence of 5 tiles will flash sequentially. Memorize their location and color in order. Once flashing stops, click the target tiles in the same sequence and select the correct color for each.
+                </div>
                 <button
                   onClick={handleStartGame}
                   className="neo-btn neo-btn-purple px-6 py-2 shadow-[4px_4px_0px_#000] text-xs font-bold font-mono"
@@ -864,9 +872,9 @@ const FocusEnduranceModule: React.FC<{ addAttempt: (attempt: any) => void }> = (
           ))}
 
           {gameState === 'idle' && (
-            <div className="absolute inset-0 bg-[#0c0c0e]/95 flex flex-col items-center justify-center space-y-4 p-6 z-20">
-              <Target className="h-12 w-12 text-[#00FF88] animate-spin" />
-              <div className="text-center space-y-3">
+            <div className="absolute inset-0 bg-[#0c0c0e]/95 flex flex-col items-center justify-center space-y-3 p-6 z-20">
+              <Target className="h-8 w-8 text-[#00FF88] animate-spin" />
+              <div className="text-center space-y-3 max-w-xs">
                 <span className="text-xs font-mono text-slate-400 block uppercase tracking-widest font-bold">Select Assay Span</span>
                 
                 <div className="flex justify-center space-x-2">
@@ -885,6 +893,11 @@ const FocusEnduranceModule: React.FC<{ addAttempt: (attempt: any) => void }> = (
                       {t} SEC
                     </button>
                   ))}
+                </div>
+
+                <div className="text-[10px] leading-relaxed text-slate-300 font-semibold border-2 border-black bg-[#1c1c24] p-3 font-mono shadow-[3px_3px_0px_#000] text-left">
+                  <span className="text-[#00FF88] font-black block mb-1">INSTRUCTIONS:</span>
+                  Green <span className="text-[#00FF88] font-bold">TARGET</span> and purple <span className="text-[#A855F7] font-bold">IGNORE</span> circles will appear. Click green targets quickly before they disappear. Ignore purple distractors. Clicks on background or distractors count as false clicks.
                 </div>
 
                 <button
