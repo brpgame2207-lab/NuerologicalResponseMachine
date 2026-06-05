@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --color-brand-navy: #0B1020;
+  --color-brand-cyan: #00E5FF;
+  --color-brand-green: #00FF88;
+  --color-brand-purple: #7C3AED;
+}
+
+/* Custom Scrollbar for Laboratory Aesthetic */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070b19;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #121b3a;
+  border: 1px solid #1e293b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00e5ff30;
+  border-color: #00e5ff50;
+}
+
+/* Global Resets */
+body {
+  background-color: #070b19;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* Focus Outline Accessibility */
+*:focus-visible {
+  outline: 2px solid #00e5ff;
+  outline-offset: 2px;
+}
+
+/* Custom interactive animation keys */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
