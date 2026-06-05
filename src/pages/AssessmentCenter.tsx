@@ -23,15 +23,15 @@ export const AssessmentCenter: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Navigation header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-800 pb-4 gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b-[3px] border-black pb-4 gap-4">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight">Assessment Center</h1>
-          <p className="text-sm text-slate-400">Measure, calibrate, and record neurological response baselines.</p>
+          <h1 className="text-3xl font-black tracking-tight uppercase">Assessment Center</h1>
+          <p className="text-sm text-slate-400 font-bold">Measure, calibrate, and record neurological response baselines.</p>
         </div>
         {activeModule && (
           <button 
             onClick={() => setActiveModule(null)}
-            className="text-xs font-mono text-cyan-400 hover:text-cyan-300 border border-cyan-500/20 bg-cyan-500/5 px-3 py-1.5 rounded-lg flex items-center space-x-1.5 transition-colors"
+            className="neo-btn neo-btn-cyan px-3 py-1.5 text-xs font-mono flex items-center space-x-1.5 shadow-[2px_2px_0px_#000] hover:shadow-none hover:translate-x-[1px] hover:translate-y-[1px]"
           >
             <RefreshCw className="h-3.5 w-3.5" />
             <span>RETURN TO MODULE SELECTOR</span>
@@ -42,81 +42,81 @@ export const AssessmentCenter: React.FC = () => {
       {!activeModule ? (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Module 1 Card */}
-          <GlassCard glowColor="cyan" className="flex flex-col justify-between h-[360px]">
-            <div className="space-y-4">
+          <GlassCard glowColor="cyan" className="flex flex-col justify-between">
+            <div className="space-y-3">
               <div className="flex justify-between items-start">
-                <div className="bg-cyan-500/10 p-2 rounded-lg border border-cyan-500/30 text-cyan-400">
-                  <Timer className="h-6 w-6" />
+                <div className="bg-[#00E5FF]/20 p-2 rounded-none border-2 border-black text-[#00E5FF] shadow-[2px_2px_0px_#000]">
+                  <Timer className="h-5 w-5" />
                 </div>
-                <span className="text-[10px] text-cyan-400 font-mono tracking-wider bg-cyan-500/5 px-2 py-0.5 rounded border border-cyan-500/20">
+                <span className="text-[10px] text-[#00E5FF] font-mono tracking-wider bg-black border-2 border-black px-2 py-0.5 rounded-none font-bold">
                   MODULE 1
                 </span>
               </div>
-              <h3 className="text-xl font-bold">Visual Reflex Checker</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Measures absolute synaptic processing speed. Detects latency from photo-reception on the retina, trans-axonal conduction through the optic tract, somatic decision-making in the cortex, and peripheral motor contraction.
+              <h3 className="text-base font-extrabold text-white uppercase">Visual Reflex Checker</h3>
+              <p className="text-[11px] text-slate-400 font-semibold">
+                Measures reaction latency from visual stimulus to motor response. Tests optic-to-cortical processing speed.
               </p>
-              <div className="text-[10px] text-slate-500 font-mono">
-                ⚡ Latency Scale: Elite (&lt;200ms) | Good (250-320ms)
+              <div className="text-[10px] text-slate-400 font-mono font-bold bg-black p-1.5 border border-black inline-block">
+                ⚡ Elite &lt;200ms | Good 250–320ms
               </div>
             </div>
             <button 
               onClick={() => setActiveModule('visual-reflex')}
-              className="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-2.5 rounded-lg text-sm transition-colors mt-4"
+              className="w-full text-center neo-btn neo-btn-cyan py-2 text-xs shadow-[3px_3px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] mt-4"
             >
               Initialize Module
             </button>
           </GlassCard>
 
           {/* Module 2 Card */}
-          <GlassCard glowColor="purple" className="flex flex-col justify-between h-[360px]">
-            <div className="space-y-4">
+          <GlassCard glowColor="purple" className="flex flex-col justify-between">
+            <div className="space-y-3">
               <div className="flex justify-between items-start">
-                <div className="bg-purple-500/10 p-2 rounded-lg border border-purple-500/30 text-purple-400">
-                  <Grid className="h-6 w-6" />
+                <div className="bg-[#7C3AED]/20 p-2 rounded-none border-2 border-black text-[#A855F7] shadow-[2px_2px_0px_#000]">
+                  <Grid className="h-5 w-5" />
                 </div>
-                <span className="text-[10px] text-purple-400 font-mono tracking-wider bg-purple-500/5 px-2 py-0.5 rounded border border-purple-500/20">
+                <span className="text-[10px] text-[#A855F7] font-mono tracking-wider bg-black border-2 border-black px-2 py-0.5 rounded-none font-bold">
                   MODULE 2
                 </span>
               </div>
-              <h3 className="text-xl font-bold">Color Tile Memory</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Assesses temporary spatial and chromatic memory. Lights up an active grid sequence. Relies on the working memory capacity of the prefrontal cortex and spatial encoding loops within the hippocampus.
+              <h3 className="text-base font-extrabold text-white uppercase">Color Tile Memory</h3>
+              <p className="text-[11px] text-slate-400 font-semibold">
+                Tests spatial & chromatic working memory by memorizing a lit grid sequence, then recalling tile positions and colors.
               </p>
-              <div className="text-[10px] text-slate-500 font-mono">
-                🧠 Target Metrics: Recall accuracy & recognition speed
+              <div className="text-[10px] text-slate-400 font-mono font-bold bg-black p-1.5 border border-black inline-block">
+                🧠 Recall accuracy &amp; recognition speed
               </div>
             </div>
             <button 
               onClick={() => setActiveModule('memory-tile')}
-              className="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-2.5 rounded-lg text-sm transition-colors mt-4"
+              className="w-full text-center neo-btn neo-btn-purple py-2 text-xs shadow-[3px_3px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] mt-4"
             >
               Initialize Module
             </button>
           </GlassCard>
 
           {/* Module 3 Card */}
-          <GlassCard glowColor="green" className="flex flex-col justify-between h-[360px]">
-            <div className="space-y-4">
+          <GlassCard glowColor="green" className="flex flex-col justify-between">
+            <div className="space-y-3">
               <div className="flex justify-between items-start">
-                <div className="bg-emerald-500/10 p-2 rounded-lg border border-emerald-500/30 text-emerald-400">
-                  <Target className="h-6 w-6" />
+                <div className="bg-[#00FF88]/20 p-2 rounded-none border-2 border-black text-[#00FF88] shadow-[2px_2px_0px_#000]">
+                  <Target className="h-5 w-5" />
                 </div>
-                <span className="text-[10px] text-emerald-400 font-mono tracking-wider bg-emerald-500/5 px-2 py-0.5 rounded border border-emerald-500/20">
+                <span className="text-[10px] text-[#00FF88] font-mono tracking-wider bg-black border-2 border-black px-2 py-0.5 rounded-none font-bold">
                   MODULE 3
                 </span>
               </div>
-              <h3 className="text-xl font-bold">Focus Endurance Test</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Quantifies sustained visual attention (vigilance) and distractor inhibition. Over a prolonged span, clicking active green targets while filtering purple distractors measures cognitive fatigue accumulation.
+              <h3 className="text-base font-extrabold text-white uppercase">Focus Endurance Test</h3>
+              <p className="text-[11px] text-slate-400 font-semibold">
+                Tracks sustained attention over time. Click active targets, ignore distractors — measures cognitive fatigue and vigilance decay.
               </p>
-              <div className="text-[10px] text-slate-500 font-mono">
-                🎯 Target Metrics: Attention stability & fatigue index
+              <div className="text-[10px] text-slate-400 font-mono font-bold bg-black p-1.5 border border-black inline-block">
+                🎯 Attention stability &amp; fatigue index
               </div>
             </div>
             <button 
               onClick={() => setActiveModule('focus-endurance')}
-              className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-2.5 rounded-lg text-sm transition-colors mt-4"
+              className="w-full text-center neo-btn neo-btn-green py-2 text-xs shadow-[3px_3px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] mt-4"
             >
               Initialize Module
             </button>
@@ -224,33 +224,33 @@ const VisualReflexModule: React.FC<ModuleProps> = ({ addAttempt, getPerformanceC
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* Active Testing Module */}
       <GlassCard glowColor="cyan" className="lg:col-span-2 flex flex-col justify-between space-y-6">
-        <div className="flex justify-between items-center border-b border-slate-800 pb-3">
+        <div className="flex justify-between items-center border-b-[2px] border-black pb-3">
           <div className="flex items-center space-x-2">
-            <Timer className="h-5 w-5 text-cyan-400" />
-            <h2 className="text-lg font-bold">Latency Assay Panel</h2>
+            <Timer className="h-5 w-5 text-[#00E5FF]" />
+            <h2 className="text-lg font-extrabold uppercase text-white">Latency Assay Panel</h2>
           </div>
-          <span className="text-xs text-slate-400 font-mono">TESTS RUN: {attempts.length}</span>
+          <span className="text-xs text-slate-400 font-mono font-bold">TESTS RUN: {attempts.length}</span>
         </div>
 
         {/* Trigger Target Box */}
         <div 
           onClick={handleTriggerClick}
           className={`
-            h-64 rounded-xl flex flex-col items-center justify-center text-center cursor-pointer select-none transition-all duration-150 border-2 relative overflow-hidden
-            ${phase === 'idle' ? 'bg-slate-950/60 border-slate-800 hover:border-slate-700' : ''}
-            ${phase === 'preparing' ? 'bg-slate-900 border-yellow-500/30' : ''}
-            ${phase === 'waiting' ? 'bg-[#991b1b]/20 border-red-500/50 hover:bg-[#991b1b]/30' : ''}
-            ${phase === 'green' ? 'bg-[#10b981]/30 border-emerald-400 shadow-[0_0_35px_rgba(16,185,129,0.2)]' : ''}
-            ${phase === 'result' ? 'bg-slate-950/60 border-cyan-500/40 hover:border-cyan-500/60' : ''}
-            ${phase === 'misfire' ? 'bg-red-950/40 border-rose-600/50' : ''}
+            h-64 rounded-none flex flex-col items-center justify-center text-center cursor-pointer select-none transition-all duration-150 border-[3px] border-black relative overflow-hidden
+            ${phase === 'idle' ? 'bg-black shadow-[4px_4px_0px_#000]' : ''}
+            ${phase === 'preparing' ? 'bg-black shadow-[4px_4px_0px_#FFDE47]' : ''}
+            ${phase === 'waiting' ? 'bg-[#991b1b]/40 shadow-[4px_4px_0px_#ef4444]' : ''}
+            ${phase === 'green' ? 'bg-[#10b981]/50 shadow-[4px_4px_0px_#00FF88] scale-[1.01]' : ''}
+            ${phase === 'result' ? 'bg-black shadow-[4px_4px_0px_#00E5FF]' : ''}
+            ${phase === 'misfire' ? 'bg-[#881337] shadow-[4px_4px_0px_#f43f5e]' : ''}
           `}
         >
           {phase === 'idle' && (
-            <div className="space-y-2 pointer-events-none">
-              <span className="text-sm font-mono text-cyan-400 block tracking-wider">SYSTEM CALIBRATED</span>
+            <div className="space-y-3 pointer-events-none">
+              <span className="text-xs font-mono text-[#00E5FF] block tracking-wider font-extrabold">SYSTEM CALIBRATED</span>
               <button 
                 onClick={(e) => { e.stopPropagation(); handleStartTest(); }}
-                className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-6 py-2.5 rounded-lg text-sm shadow-[0_0_15px_rgba(0,229,255,0.2)] transition-colors pointer-events-auto"
+                className="neo-btn neo-btn-cyan px-6 py-2.5 shadow-[4px_4px_0px_#000000] text-xs pointer-events-auto hover:translate-x-[1px] hover:translate-y-[1px] active:translate-x-[3px] active:translate-y-[3px]"
               >
                 Click To Initiate Sensor
               </button>
@@ -259,39 +259,39 @@ const VisualReflexModule: React.FC<ModuleProps> = ({ addAttempt, getPerformanceC
 
           {phase === 'preparing' && (
             <div className="space-y-2 font-mono text-xs">
-              <RefreshCw className="h-6 w-6 text-yellow-400 animate-spin mx-auto" />
-              <p className="text-yellow-400 tracking-wider">INITIATING PHOTO-RECEIVE CHANNEL...</p>
-              <p className="text-slate-500">Wait for stimulus signal.</p>
+              <RefreshCw className="h-6 w-6 text-[#FFDE47] animate-spin mx-auto" />
+              <p className="text-[#FFDE47] tracking-wider font-bold">INITIATING PHOTO-RECEIVE CHANNEL...</p>
+              <p className="text-slate-400 font-bold">Wait for stimulus signal.</p>
             </div>
           )}
 
           {phase === 'waiting' && (
             <div className="space-y-1 text-center">
-              <span className="text-4xl font-extrabold text-red-500 animate-pulse tracking-wide block">STATIONARY</span>
-              <p className="text-xs font-mono text-slate-400 uppercase tracking-widest mt-2">WAIT FOR GREEN SIGNAL</p>
-              <p className="text-[10px] text-slate-500 font-mono">(Clicking now will cause synaptic misfire)</p>
+              <span className="text-4xl font-black text-red-500 animate-pulse tracking-widest block">STATIONARY</span>
+              <p className="text-xs font-mono text-slate-300 uppercase tracking-widest mt-2 font-bold">WAIT FOR GREEN SIGNAL</p>
+              <p className="text-[10px] text-slate-400 font-mono font-bold">(Clicking now will cause synaptic misfire)</p>
             </div>
           )}
 
           {phase === 'green' && (
             <div className="space-y-1 text-center">
-              <span className="text-5xl font-black text-emerald-400 tracking-widest animate-bounce block">CLICK NOW!</span>
-              <p className="text-xs font-mono text-emerald-200 tracking-widest">TRANSMIT MOTOR ACTION POTENTIAL</p>
+              <span className="text-5xl font-black text-[#00FF88] tracking-widest animate-bounce block">CLICK NOW!</span>
+              <p className="text-xs font-mono text-emerald-200 tracking-widest font-bold">TRANSMIT MOTOR ACTION POTENTIAL</p>
             </div>
           )}
 
           {phase === 'result' && (
             <div className="space-y-3">
-              <span className="text-xs font-mono text-cyan-400 block uppercase tracking-widest">ASSAY COMPLETED</span>
+              <span className="text-xs font-mono text-[#00E5FF] block uppercase tracking-widest font-extrabold">ASSAY COMPLETED</span>
               <div className="text-5xl font-black text-white font-mono tracking-tighter">
                 {currentResult} <span className="text-xs text-slate-400 font-normal">ms</span>
               </div>
-              <div className="text-xs font-mono">
-                Performance Category: <span className="text-cyan-300 font-bold">{category}</span>
+              <div className="text-xs font-mono font-bold">
+                Performance Category: <span className="text-[#00E5FF] font-extrabold">{category}</span>
               </div>
               <button 
                 onClick={(e) => { e.stopPropagation(); handleStartTest(); }}
-                className="bg-slate-900 border border-slate-800 hover:bg-slate-800 text-xs px-4 py-2 rounded font-mono text-slate-300 transition-colors pointer-events-auto"
+                className="neo-btn neo-btn-cyan px-4 py-2 text-xs font-mono pointer-events-auto shadow-[3px_3px_0px_#000]"
               >
                 START SUBSEQUENT SCANS
               </button>
@@ -302,12 +302,12 @@ const VisualReflexModule: React.FC<ModuleProps> = ({ addAttempt, getPerformanceC
             <div className="space-y-3 p-4">
               <AlertTriangle className="h-10 w-10 text-rose-500 animate-bounce mx-auto" />
               <span className="text-sm font-bold text-rose-500 tracking-wider font-mono block">SYNAPTIC MISFIRE DETECTION</span>
-              <p className="text-xs text-slate-400 max-w-sm mx-auto leading-relaxed">
+              <p className="text-xs text-slate-300 max-w-sm mx-auto leading-relaxed font-semibold">
                 Visual response command sent before sensory signal arrived in visual cortex. The reflex loop triggered prematurely.
               </p>
               <button 
                 onClick={(e) => { e.stopPropagation(); handleStartTest(); }}
-                className="bg-rose-500/20 border border-rose-500/40 hover:bg-rose-500/30 text-xs text-rose-300 px-4 py-2 rounded font-mono transition-colors pointer-events-auto"
+                className="neo-btn neo-btn-purple px-4 py-2 text-xs font-mono pointer-events-auto shadow-[3px_3px_0px_#000]"
               >
                 Reset Calibration Loop
               </button>
@@ -316,18 +316,18 @@ const VisualReflexModule: React.FC<ModuleProps> = ({ addAttempt, getPerformanceC
         </div>
 
         {/* Dynamic score summary */}
-        <div className="grid grid-cols-3 gap-4 border-t border-slate-800/60 pt-4">
-          <div className="bg-slate-900/60 rounded-lg p-3 border border-slate-850/60">
-            <span className="text-[10px] text-slate-500 font-mono block">BEST TIME</span>
-            <span className="text-xl font-bold font-mono text-cyan-400">{bestTime || '--'} <span className="text-[10px] text-slate-500 font-normal">ms</span></span>
+        <div className="grid grid-cols-3 gap-4 border-t-[2px] border-black pt-4">
+          <div className="bg-[#1c1c24] rounded-none p-3 border-[2px] border-black shadow-[3px_3px_0px_#000]">
+            <span className="text-[10px] text-slate-400 font-mono block font-bold">BEST TIME</span>
+            <span className="text-xl font-black font-mono text-[#00E5FF]">{bestTime || '--'} <span className="text-[10px] text-slate-400 font-normal">ms</span></span>
           </div>
-          <div className="bg-slate-900/60 rounded-lg p-3 border border-slate-850/60">
-            <span className="text-[10px] text-slate-500 font-mono block">AVERAGE LATENCY</span>
-            <span className="text-xl font-bold font-mono text-teal-400">{avgTime || '--'} <span className="text-[10px] text-slate-500 font-normal">ms</span></span>
+          <div className="bg-[#1c1c24] rounded-none p-3 border-[2px] border-black shadow-[3px_3px_0px_#000]">
+            <span className="text-[10px] text-slate-400 font-mono block font-bold">AVERAGE LATENCY</span>
+            <span className="text-xl font-black font-mono text-[#00FF88]">{avgTime || '--'} <span className="text-[10px] text-slate-400 font-normal">ms</span></span>
           </div>
-          <div className="bg-slate-900/60 rounded-lg p-3 border border-slate-850/60">
-            <span className="text-[10px] text-slate-500 font-mono block">CONSISTENCY</span>
-            <span className="text-xl font-bold font-mono text-purple-400">{attempts.length > 1 ? `${consistency}%` : '--'}</span>
+          <div className="bg-[#1c1c24] rounded-none p-3 border-[2px] border-black shadow-[3px_3px_0px_#000]">
+            <span className="text-[10px] text-slate-400 font-mono block font-bold">CONSISTENCY</span>
+            <span className="text-xl font-black font-mono text-[#A855F7]">{attempts.length > 1 ? `${consistency}%` : '--'}</span>
           </div>
         </div>
       </GlassCard>
@@ -335,16 +335,16 @@ const VisualReflexModule: React.FC<ModuleProps> = ({ addAttempt, getPerformanceC
       {/* Neurological context card */}
       <GlassCard glowColor="purple" className="flex flex-col justify-between space-y-4 text-sm">
         <div className="space-y-3">
-          <div className="flex items-center space-x-2 border-b border-slate-800 pb-2">
-            <Brain className="h-5 w-5 text-purple-400" />
-            <h3 className="font-bold">Neurological Process</h3>
+          <div className="flex items-center space-x-2 border-b-[2px] border-black pb-2">
+            <Brain className="h-5 w-5 text-[#A855F7]" />
+            <h3 className="font-extrabold uppercase text-white">Neurological Process</h3>
           </div>
           
-          <div className="space-y-4 leading-relaxed text-xs text-slate-300">
+          <div className="space-y-4 leading-relaxed text-xs text-slate-300 font-medium">
             <p>
               When the screen changes from Red to Green, your visual receptors (photoreceptive rods and cones in the retina) trigger electrical impulses.
             </p>
-            <div className="border-l-2 border-cyan-500/30 pl-3 py-1 space-y-2 font-mono text-[10px] text-slate-400 bg-slate-900/40 rounded-r">
+            <div className="border-l-[3px] border-[#00E5FF] pl-3 py-2 space-y-2 font-mono text-[10px] text-slate-300 bg-black border-y border-r border-black rounded-none shadow-[2px_2px_0px_#000]">
               <div>1. Photoreceptors convert photons.</div>
               <div>2. Action potential travels via <b>Optic Nerve</b>.</div>
               <div>3. Synapses in <b>Lateral Geniculate Nucleus</b>.</div>
@@ -358,8 +358,8 @@ const VisualReflexModule: React.FC<ModuleProps> = ({ addAttempt, getPerformanceC
           </div>
         </div>
 
-        <div className="bg-slate-900/80 rounded border border-slate-800 p-3 flex items-start space-x-2 text-[10px] text-slate-500">
-          <HelpCircle className="h-4 w-4 text-purple-400 shrink-0 mt-0.5" />
+        <div className="bg-[#1c1c24] rounded-none border-[2px] border-black p-3 flex items-start space-x-2 text-[10px] text-slate-300 shadow-[2px_2px_0px_#000]">
+          <HelpCircle className="h-4 w-4 text-[#A855F7] shrink-0 mt-0.5" />
           <span>Consistency tracks variations. Lower variability indicates strong myelin insulation around active motor pathways.</span>
         </div>
       </GlassCard>
@@ -383,7 +383,7 @@ const MemoryTileModule: React.FC<{ addAttempt: (attempt: any) => void }> = ({ ad
   
   // Timing parameters
   const startTimeRef = useRef<number>(0);
-  const totalRecallTimeRef = useRef<number>(0);
+  const [totalRecallTime, setTotalRecallTime] = useState<number>(0);
 
   const colors = [
     { name: 'Red', hex: '#ef4444' },
@@ -467,7 +467,8 @@ const MemoryTileModule: React.FC<{ addAttempt: (attempt: any) => void }> = ({ ad
     // If completed
     if (nextIndex >= sequence.length) {
       const endRecallTime = performance.now();
-      totalRecallTimeRef.current = Math.round(endRecallTime - startTimeRef.current);
+      const elapsed = Math.round(endRecallTime - startTimeRef.current);
+      setTotalRecallTime(elapsed);
       setGameState('result');
       
       // Calculate score based on exact matching (each node worth 20 points: 10 for location, 10 for color)
@@ -481,7 +482,7 @@ const MemoryTileModule: React.FC<{ addAttempt: (attempt: any) => void }> = ({ ad
         module: 'memory-tile',
         score: rawScore,
         accuracy: Math.round(((correctColorCount + correctLocCount) / (sequence.length * 2)) * 100),
-        responseTime: Math.round(totalRecallTimeRef.current / sequence.length), // average response time per tile
+        responseTime: Math.round(elapsed / sequence.length), // average response time per tile
         rawMetrics: {
           gridSize: 9,
           correctTilesCount: correctLocCount,
@@ -497,12 +498,12 @@ const MemoryTileModule: React.FC<{ addAttempt: (attempt: any) => void }> = ({ ad
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* Dynamic tile play area */}
       <GlassCard glowColor="purple" className="lg:col-span-2 flex flex-col justify-between space-y-6">
-        <div className="flex justify-between items-center border-b border-slate-800 pb-3">
+        <div className="flex justify-between items-center border-b-[2px] border-black pb-3">
           <div className="flex items-center space-x-2">
-            <Grid className="h-5 w-5 text-purple-400" />
-            <h2 className="text-lg font-bold">Spatial-Chromatic Recall</h2>
+            <Grid className="h-5 w-5 text-[#A855F7]" />
+            <h2 className="text-lg font-extrabold uppercase text-white">Spatial-Chromatic Recall</h2>
           </div>
-          <span className="text-xs font-mono text-slate-400">
+          <span className="text-xs font-mono font-bold text-slate-400">
             {gameState === 'showing' ? `FLASHING PATHWAY ${recallIndex + 1}/5` : ''}
             {gameState === 'recall' ? `RECALL PHASE: TARGET ${recallIndex + 1}/5` : ''}
             {gameState === 'result' ? 'ASSAY COMPLETE' : ''}
@@ -528,15 +529,15 @@ const MemoryTileModule: React.FC<{ addAttempt: (attempt: any) => void }> = ({ ad
                   onClick={() => handleTileClick(index)}
                   style={{ backgroundColor: isLit ? tileColorHex : undefined }}
                   className={`
-                    w-full h-full rounded-lg border flex items-center justify-center relative cursor-pointer select-none transition-all duration-200
-                    ${isLit ? 'border-transparent shadow-lg text-white font-extrabold' : 'border-slate-800 bg-slate-900/50 hover:bg-slate-900 hover:border-slate-700'}
-                    ${gameState === 'recall' && selectedRecallTile === index ? 'ring-2 ring-purple-500 scale-95 shadow-[0_0_15px_rgba(124,58,237,0.4)]' : ''}
+                    w-full h-full rounded-none border-[3px] flex items-center justify-center relative cursor-pointer select-none transition-all duration-150
+                    ${isLit ? 'border-black shadow-[3px_3px_0px_#000] text-white font-black scale-95' : 'border-black bg-[#1c1c24] hover:bg-black hover:shadow-[2px_2px_0px_#000]'}
+                    ${gameState === 'recall' && selectedRecallTile === index ? 'border-[#7C3AED] ring-[3px] ring-black scale-95 bg-[#7C3AED]/20 shadow-[3px_3px_0px_#000]' : ''}
                   `}
                 >
-                  <span className="text-[10px] text-slate-600 font-mono absolute top-1 left-1.5">{index + 1}</span>
+                  <span className="text-[10px] text-slate-400 font-mono font-bold absolute top-1 left-1.5">{index + 1}</span>
                   {/* Recall feedback dot */}
                   {recallStepMatched && (
-                    <div className={`w-3 h-3 rounded-full ${recallStepMatched.locationMatched ? 'bg-emerald-500' : 'bg-rose-500'}`} />
+                    <div className={`w-3.5 h-3.5 border-2 border-black rounded-full ${recallStepMatched.locationMatched ? 'bg-[#00FF88]' : 'bg-[#FF007F]'}`} />
                   )}
                 </div>
               );
@@ -545,15 +546,15 @@ const MemoryTileModule: React.FC<{ addAttempt: (attempt: any) => void }> = ({ ad
 
           {/* Color Selection Overlay Popover */}
           {selectedRecallTile !== null && (
-            <div className="absolute inset-0 bg-[#070b19]/90 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center space-y-4 rounded-xl border border-purple-500/20 z-20">
-              <span className="text-xs text-purple-300 font-mono tracking-wider">IDENTIFY COLOR ASSOCIATED WITH TILE {selectedRecallTile + 1}</span>
+            <div className="absolute inset-0 bg-[#0c0c0e]/95 flex flex-col items-center justify-center p-6 text-center space-y-4 rounded-none border-[3px] border-black shadow-[4px_4px_0px_#000] z-20">
+              <span className="text-xs text-purple-300 font-mono tracking-widest font-bold">IDENTIFY COLOR ASSOCIATED WITH TILE {selectedRecallTile + 1}</span>
               <div className="grid grid-cols-3 gap-3 w-full max-w-sm">
                 {colors.map((c) => (
                   <button
                     key={c.name}
                     onClick={() => handleColorChoice(c.name)}
                     style={{ borderLeftColor: c.hex }}
-                    className="bg-slate-900 hover:bg-slate-800 text-white text-xs py-2 px-3 border border-slate-800 rounded border-l-4 font-mono transition-colors"
+                    className="bg-black hover:bg-white hover:text-black text-white text-xs py-2 px-3 border-2 border-black border-l-8 font-mono transition-colors font-bold"
                   >
                     {c.name}
                   </button>
@@ -564,13 +565,13 @@ const MemoryTileModule: React.FC<{ addAttempt: (attempt: any) => void }> = ({ ad
 
           {/* Prompt overlays */}
           {gameState === 'idle' && (
-            <div className="absolute inset-0 bg-[#070b19]/90 backdrop-blur-sm flex flex-col items-center justify-center space-y-3 rounded-xl border border-slate-800">
+            <div className="absolute inset-0 bg-[#0c0c0e]/95 flex flex-col items-center justify-center space-y-4 rounded-none border-[3px] border-black shadow-[4px_4px_0px_#000] p-6 z-20">
               <Grid className="h-10 w-10 text-purple-400 animate-pulse" />
-              <div className="text-center">
-                <span className="text-xs font-mono text-slate-500 block mb-1">GRID MEMORY ACTIVE</span>
+              <div className="text-center space-y-3">
+                <span className="text-xs font-mono text-slate-400 block font-bold tracking-widest">GRID MEMORY ACTIVE</span>
                 <button
                   onClick={handleStartGame}
-                  className="bg-purple-600 hover:bg-purple-500 text-white font-bold px-6 py-2 rounded text-sm tracking-wide shadow-lg shadow-purple-500/20 transition-all"
+                  className="neo-btn neo-btn-purple px-6 py-2 shadow-[4px_4px_0px_#000] text-xs font-bold font-mono"
                 >
                   LOAD SEQUENCE
                 </button>
@@ -579,19 +580,19 @@ const MemoryTileModule: React.FC<{ addAttempt: (attempt: any) => void }> = ({ ad
           )}
 
           {gameState === 'result' && (
-            <div className="absolute inset-0 bg-[#070b19]/95 backdrop-blur-md flex flex-col items-center justify-center text-center space-y-4 rounded-xl border border-purple-500/30">
-              <span className="text-xs font-mono text-purple-400 tracking-widest block">DIAGNOSTIC ARCHIVE</span>
-              <div className="text-4xl font-extrabold tracking-tight">
-                Score: <span className="text-purple-400 font-mono">{score}%</span>
+            <div className="absolute inset-0 bg-[#0c0c0e]/95 flex flex-col items-center justify-center text-center space-y-4 rounded-none border-[3px] border-black shadow-[4px_4px_0px_#000] p-6 z-20">
+              <span className="text-xs font-mono text-[#A855F7] tracking-widest block font-extrabold">DIAGNOSTIC ARCHIVE</span>
+              <div className="text-4xl font-black tracking-tight text-white">
+                Score: <span className="text-[#A855F7] font-mono">{score}%</span>
               </div>
-              <div className="text-xs text-slate-400 space-y-1 font-mono">
+              <div className="text-xs text-slate-300 space-y-1.5 font-mono font-bold bg-black p-3 border-2 border-black shadow-[2px_2px_0px_#000] inline-block">
                 <div>Recall Accuracy: {Math.round((recallResults.filter(r=>r.colorMatched).length / sequence.length)*100)}%</div>
                 <div>Pattern Recall: {Math.round((recallResults.filter(r=>r.locationMatched).length / sequence.length)*100)}%</div>
-                <div>Recall Speed: {(totalRecallTimeRef.current / 1000).toFixed(2)}s</div>
+                <div>Recall Speed: {(totalRecallTime / 1000).toFixed(2)}s</div>
               </div>
               <button 
                 onClick={handleStartGame}
-                className="bg-slate-900 border border-slate-800 hover:bg-slate-850 text-xs px-4 py-2 rounded font-mono text-slate-300 transition-colors"
+                className="neo-btn neo-btn-purple px-4 py-2 shadow-[3px_3px_0px_#000] text-xs font-bold font-mono"
               >
                 RUN SUBSEQUENT ASSAY
               </button>
@@ -600,7 +601,7 @@ const MemoryTileModule: React.FC<{ addAttempt: (attempt: any) => void }> = ({ ad
         </div>
 
         {/* Dynamic tips */}
-        <div className="bg-slate-900/60 rounded-lg p-3 border border-slate-850/60 flex items-center space-x-2 text-xs text-slate-400">
+        <div className="bg-[#1c1c24] rounded-none p-3 border-2 border-black flex items-center space-x-2 text-xs text-slate-300 shadow-[2px_2px_0px_#000] font-semibold">
           <Sparkles className="h-4 w-4 text-purple-400 shrink-0" />
           <span>Memorize spatial paths and color properties simultaneously. Both metrics feed your Working Memory Index.</span>
         </div>
@@ -609,19 +610,19 @@ const MemoryTileModule: React.FC<{ addAttempt: (attempt: any) => void }> = ({ ad
       {/* Neuroscience focus */}
       <GlassCard glowColor="cyan" className="flex flex-col justify-between space-y-4 text-sm">
         <div className="space-y-3">
-          <div className="flex items-center space-x-2 border-b border-slate-800 pb-2">
-            <Brain className="h-5 w-5 text-cyan-400" />
-            <h3 className="font-bold">Memory Pathways</h3>
+          <div className="flex items-center space-x-2 border-b-[2px] border-black pb-2">
+            <Brain className="h-5 w-5 text-[#00E5FF]" />
+            <h3 className="font-extrabold uppercase text-white">Memory Pathways</h3>
           </div>
 
-          <div className="space-y-3 text-xs text-slate-300 leading-relaxed">
+          <div className="space-y-3 text-xs text-slate-300 leading-relaxed font-medium">
             <p>
               Short-term recall utilizes two distinct processes in the brain: the **Visuospatial Sketchpad** (temporary storage of spatial coordinates) and **Chromatic Encoding** (visual recognition pathways).
             </p>
             <p>
               Sensory input from the eye reaches the visual cortex and is then split:
             </p>
-            <div className="bg-slate-900/50 rounded p-2.5 border border-slate-850 font-mono text-[10px] text-slate-400 space-y-1">
+            <div className="bg-black rounded-none p-2.5 border-2 border-black font-mono text-[10px] text-slate-300 shadow-[2px_2px_0px_#000] space-y-1">
               <div><b>Dorsal Stream ("Where"):</b> Frontoparietal networks map spatial layout.</div>
               <div><b>Ventral Stream ("What"):</b> Temporal lobes identify color definitions.</div>
             </div>
@@ -631,8 +632,8 @@ const MemoryTileModule: React.FC<{ addAttempt: (attempt: any) => void }> = ({ ad
           </div>
         </div>
 
-        <div className="bg-slate-900/80 rounded border border-slate-800 p-3 flex items-start space-x-2 text-[10px] text-slate-500 font-mono">
-          <ShieldCheck className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+        <div className="bg-[#1c1c24] rounded-none border-2 border-black p-3 flex items-start space-x-2 text-[10px] text-slate-300 font-mono shadow-[2px_2px_0px_#000]">
+          <ShieldCheck className="h-4 w-4 text-[#00FF88] shrink-0 mt-0.5" />
           <span>Training this module systematically triggers neuroplasticity in the prefrontal cortex, enhancing overall executive function.</span>
         </div>
       </GlassCard>
@@ -819,16 +820,16 @@ const FocusEnduranceModule: React.FC<{ addAttempt: (attempt: any) => void }> = (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* Playing field */}
       <GlassCard glowColor="green" className="lg:col-span-2 flex flex-col justify-between space-y-6">
-        <div className="flex justify-between items-center border-b border-slate-800 pb-3">
+        <div className="flex justify-between items-center border-b-[2px] border-black pb-3">
           <div className="flex items-center space-x-2">
-            <Target className="h-5 w-5 text-emerald-400 animate-pulse" />
-            <h2 className="text-lg font-bold">Vigilance Field Assay</h2>
+            <Target className="h-5 w-5 text-[#00FF88]" />
+            <h2 className="text-lg font-extrabold uppercase text-white">Vigilance Field Assay</h2>
           </div>
           {gameState === 'testing' && (
-            <div className="flex items-center space-x-3 text-xs font-mono">
+            <div className="flex items-center space-x-3 text-xs font-mono font-bold bg-black px-2.5 py-1 border border-black shadow-[2px_2px_0px_#000]">
               <span className="text-slate-400">TIME: {timeLeft}s</span>
-              <span className="text-emerald-400">HITS: {hits}</span>
-              <span className="text-rose-500">MISS: {misses}</span>
+              <span className="text-[#00FF88]">HITS: {hits}</span>
+              <span className="text-[#FF007F]">MISS: {misses}</span>
             </div>
           )}
         </div>
@@ -836,7 +837,7 @@ const FocusEnduranceModule: React.FC<{ addAttempt: (attempt: any) => void }> = (
         {/* Dynamic visual arena */}
         <div 
           onClick={handleBackgroundClick}
-          className="h-80 w-full relative bg-slate-950/80 rounded-xl border border-slate-850 overflow-hidden cursor-crosshair"
+          className="h-80 w-full relative bg-black rounded-none border-[3px] border-black overflow-hidden cursor-crosshair shadow-[4px_4px_0px_#000]"
         >
           {gameState === 'testing' && targets.map((t) => (
             <div
@@ -844,29 +845,29 @@ const FocusEnduranceModule: React.FC<{ addAttempt: (attempt: any) => void }> = (
               onClick={(e) => handleTargetClick(e, t)}
               style={{ top: `${t.y}%`, left: `${t.x}%` }}
               className={`
-                absolute w-12 h-12 rounded-full border-2 flex flex-col items-center justify-center text-[7px] font-mono font-bold select-none cursor-pointer transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 active:scale-90 shadow-md animate-pulse
-                ${t.color}
+                absolute w-12 h-12 rounded-full border-2 border-black flex flex-col items-center justify-center text-[7px] font-mono font-bold select-none cursor-pointer transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 active:scale-95 shadow-[2px_2px_0px_#000]
+                ${t.type === 'target' ? 'bg-[#00FF88] text-black' : 'bg-[#7C3AED] text-white'}
               `}
             >
               {t.type === 'target' ? (
                 <>
-                  <span className="text-cyan-300">TARGET</span>
-                  <span className="text-[6px] text-slate-400">CLICK</span>
+                  <span className="font-extrabold">TARGET</span>
+                  <span className="text-[6px] opacity-80">CLICK</span>
                 </>
               ) : (
                 <>
-                  <span className="text-purple-300">IGNORE</span>
-                  <span className="text-[6px] text-slate-400">WARN</span>
+                  <span className="font-extrabold">IGNORE</span>
+                  <span className="text-[6px] opacity-80">WARN</span>
                 </>
               )}
             </div>
           ))}
 
           {gameState === 'idle' && (
-            <div className="absolute inset-0 bg-slate-950/90 flex flex-col items-center justify-center space-y-4 p-6">
-              <Target className="h-12 w-12 text-emerald-400 animate-spin" />
+            <div className="absolute inset-0 bg-[#0c0c0e]/95 flex flex-col items-center justify-center space-y-4 p-6 z-20">
+              <Target className="h-12 w-12 text-[#00FF88] animate-spin" />
               <div className="text-center space-y-3">
-                <span className="text-xs font-mono text-slate-500 block uppercase tracking-widest">Select Assay Span</span>
+                <span className="text-xs font-mono text-slate-400 block uppercase tracking-widest font-bold">Select Assay Span</span>
                 
                 <div className="flex justify-center space-x-2">
                   {[60, 90, 120].map((t) => (
@@ -874,10 +875,10 @@ const FocusEnduranceModule: React.FC<{ addAttempt: (attempt: any) => void }> = (
                       key={t}
                       onClick={() => setDuration(t as any)}
                       className={`
-                        px-4 py-1.5 rounded font-mono text-xs border transition-all
+                        px-4 py-1.5 rounded-none font-mono text-xs border-[2px] transition-all font-bold
                         ${duration === t 
-                          ? 'border-emerald-400 text-emerald-400 bg-emerald-500/10' 
-                          : 'border-slate-800 text-slate-400 hover:text-slate-200'
+                          ? 'border-black text-black bg-[#00FF88] shadow-[2px_2px_0px_#000] scale-95' 
+                          : 'border-black bg-black text-slate-400 hover:text-white'
                         }
                       `}
                     >
@@ -888,7 +889,7 @@ const FocusEnduranceModule: React.FC<{ addAttempt: (attempt: any) => void }> = (
 
                 <button
                   onClick={startTest}
-                  className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-6 py-2.5 rounded-lg text-sm shadow-lg shadow-emerald-500/20 transition-all font-mono"
+                  className="neo-btn neo-btn-green px-6 py-2.5 shadow-[4px_4px_0px_#000000] text-xs font-bold font-mono"
                 >
                   START FOCUS ASSAY
                 </button>
@@ -897,12 +898,12 @@ const FocusEnduranceModule: React.FC<{ addAttempt: (attempt: any) => void }> = (
           )}
 
           {gameState === 'result' && (
-            <div className="absolute inset-0 bg-[#070b19]/95 flex flex-col items-center justify-center text-center space-y-4 p-6 rounded-xl border border-emerald-500/30">
-              <span className="text-xs font-mono text-emerald-400 tracking-widest">DIAGNOSTIC FILE SUBMITTED</span>
-              <div className="text-4xl font-extrabold tracking-tight">
-                Vigilance: <span className="text-emerald-400 font-mono">{hits} / {hits + misses} Hits</span>
+            <div className="absolute inset-0 bg-[#0c0c0e]/95 flex flex-col items-center justify-center text-center space-y-4 p-6 rounded-none border-[3px] border-black shadow-[4px_4px_0px_#000] z-20">
+              <span className="text-xs font-mono text-[#00FF88] tracking-widest font-extrabold">DIAGNOSTIC FILE SUBMITTED</span>
+              <div className="text-3xl font-black tracking-tight text-white">
+                Vigilance: <span className="text-[#00FF88] font-mono">{hits} / {hits + misses} Hits</span>
               </div>
-              <div className="text-xs text-slate-400 space-y-1 font-mono">
+              <div className="text-xs text-slate-300 space-y-1.5 font-mono font-bold bg-black p-3 border-2 border-black shadow-[2px_2px_0px_#000] inline-block">
                 <div>Accuracy Ratio: {calculatedAccuracy}%</div>
                 <div>False Click Count: {falseClicks}</div>
                 <div>Average Hit Latency: {avgLatency} ms</div>
@@ -910,7 +911,7 @@ const FocusEnduranceModule: React.FC<{ addAttempt: (attempt: any) => void }> = (
               </div>
               <button 
                 onClick={startTest}
-                className="bg-slate-900 border border-slate-800 hover:bg-slate-850 text-xs px-4 py-2 rounded font-mono text-slate-300 transition-colors"
+                className="neo-btn neo-btn-green px-4 py-2 shadow-[3px_3px_0px_#000] text-xs font-bold font-mono"
               >
                 RUN REPEAT ASSAY
               </button>
@@ -919,18 +920,18 @@ const FocusEnduranceModule: React.FC<{ addAttempt: (attempt: any) => void }> = (
         </div>
 
         {/* Real-time details */}
-        <div className="grid grid-cols-3 gap-4 border-t border-slate-800/60 pt-4">
-          <div className="bg-slate-900/60 rounded-lg p-3 border border-slate-850/60">
-            <span className="text-[10px] text-slate-500 font-mono block">ATTENTION SCORE</span>
-            <span className="text-xl font-bold font-mono text-emerald-400">{gameState === 'result' ? `${calculatedAccuracy}%` : '--'}</span>
+        <div className="grid grid-cols-3 gap-4 border-t-[2px] border-black pt-4">
+          <div className="bg-[#1c1c24] rounded-none p-3 border-[2px] border-black shadow-[3px_3px_0px_#000]">
+            <span className="text-[10px] text-slate-400 font-mono block font-bold">ATTENTION SCORE</span>
+            <span className="text-xl font-black font-mono text-[#00FF88]">{gameState === 'result' ? `${calculatedAccuracy}%` : '--'}</span>
           </div>
-          <div className="bg-slate-900/60 rounded-lg p-3 border border-slate-850/60">
-            <span className="text-[10px] text-slate-500 font-mono block">FALSE CLICKS</span>
-            <span className="text-xl font-bold font-mono text-rose-400">{falseClicks}</span>
+          <div className="bg-[#1c1c24] rounded-none p-3 border-[2px] border-black shadow-[3px_3px_0px_#000]">
+            <span className="text-[10px] text-slate-400 font-mono block font-bold">FALSE CLICKS</span>
+            <span className="text-xl font-black font-mono text-[#FF007F]">{falseClicks}</span>
           </div>
-          <div className="bg-slate-900/60 rounded-lg p-3 border border-slate-850/60">
-            <span className="text-[10px] text-slate-500 font-mono block">LATENCY FREQ</span>
-            <span className="text-xl font-bold font-mono text-cyan-400">{avgLatency ? `${avgLatency}ms` : '--'}</span>
+          <div className="bg-[#1c1c24] rounded-none p-3 border-[2px] border-black shadow-[3px_3px_0px_#000]">
+            <span className="text-[10px] text-slate-400 font-mono block font-bold">LATENCY FREQ</span>
+            <span className="text-xl font-black font-mono text-[#00E5FF]">{avgLatency ? `${avgLatency}ms` : '--'}</span>
           </div>
         </div>
       </GlassCard>
@@ -938,19 +939,19 @@ const FocusEnduranceModule: React.FC<{ addAttempt: (attempt: any) => void }> = (
       {/* Scientific context card */}
       <GlassCard glowColor="purple" className="flex flex-col justify-between space-y-4 text-sm">
         <div className="space-y-3">
-          <div className="flex items-center space-x-2 border-b border-slate-800 pb-2">
-            <Brain className="h-5 w-5 text-purple-400" />
-            <h3 className="font-bold">Continuous Vigilance</h3>
+          <div className="flex items-center space-x-2 border-b-[2px] border-black pb-2">
+            <Brain className="h-5 w-5 text-[#A855F7]" />
+            <h3 className="font-extrabold uppercase text-white">Continuous Vigilance</h3>
           </div>
 
-          <div className="space-y-3 text-xs text-slate-300 leading-relaxed">
+          <div className="space-y-3 text-xs text-slate-300 leading-relaxed font-medium">
             <p>
               Maintaining focus over minutes is controlled by the **Reticular Activating System (RAS)** in the brainstem and the **Prefrontal Cortex (PFC)**.
             </p>
             <p>
               Under sustained attention, the brain runs two main challenges:
             </p>
-            <div className="bg-slate-900/50 rounded p-2.5 border border-slate-850 font-mono text-[10px] text-slate-400 space-y-1">
+            <div className="bg-black rounded-none p-2.5 border-2 border-black font-mono text-[10px] text-slate-300 shadow-[2px_2px_0px_#000] space-y-1">
               <div><b>Visual Salience:</b> Identifying green dots as relevant.</div>
               <div><b>Inhibitory Control:</b> Actively ignoring distracting purple dots.</div>
             </div>
@@ -960,8 +961,8 @@ const FocusEnduranceModule: React.FC<{ addAttempt: (attempt: any) => void }> = (
           </div>
         </div>
 
-        <div className="bg-slate-900/80 rounded border border-slate-800 p-3 flex items-start space-x-2 text-[10px] text-slate-500 font-mono">
-          <Gauge className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+        <div className="bg-[#1c1c24] rounded-none border-2 border-black p-3 flex items-start space-x-2 text-[10px] text-slate-300 font-mono shadow-[2px_2px_0px_#000]">
+          <Gauge className="h-4 w-4 text-[#00FF88] shrink-0 mt-0.5" />
           <span>Lower fatigue index indicates high neurotransmitter retention and stable axonal transmission rates under high load.</span>
         </div>
       </GlassCard>

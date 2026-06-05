@@ -7,7 +7,19 @@ import TrainingArena from './pages/TrainingArena';
 import AnalyticsPage from './pages/AnalyticsPage';
 
 function App() {
-  const [activeTab, setActiveTab] = useState<string>('landing');
+  const [tabHistory, setTabHistory] = useState<string[]>(['landing']);
+  const activeTab = tabHistory[tabHistory.length - 1] || 'landing';
+
+  const setActiveTab = (tab: string) => {
+    if (tab === activeTab) return;
+    setTabHistory((prev) => [...prev, tab]);
+  };
+
+  const handleBack = () => {
+    if (tabHistory.length > 1) {
+      setTabHistory((prev) => prev.slice(0, -1));
+    }
+  };
 
   const renderActivePage = () => {
     switch (activeTab) {
@@ -26,7 +38,11 @@ function App() {
 
   return (
     <ProgressProvider>
-      <Layout activeTab={activeTab} setActiveTab={setActiveTab}>
+      <Layout 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab}
+        onBack={tabHistory.length > 1 ? handleBack : undefined}
+      >
         {renderActivePage()}
       </Layout>
     </ProgressProvider>

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 export interface TestAttempt {
   id: string;
@@ -6,7 +6,6 @@ export interface TestAttempt {
     | 'visual-reflex' 
     | 'memory-tile' 
     | 'focus-endurance' 
-    | 'game-catch' 
     | 'game-pop' 
     | 'game-direction' 
     | 'game-stroop';
@@ -82,107 +81,118 @@ const getPerformanceCategory = (score: number): 'Elite' | 'Excellent' | 'Good' |
 };
 
 export const ProgressProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [history, setHistory] = useState<TestAttempt[]>([]);
-  const [scores, setScores] = useState<PerformanceScores>({
-    npi: 0,
-    reflex: 0,
-    memory: 0,
-    focus: 0,
-    endurance: 0,
-    cognitive: 0,
-    accuracy: 0,
-  });
-
-  // Load history from local storage on mount
-  useEffect(() => {
+  const [history, setHistory] = useState<TestAttempt[]>(() => {
     const saved = localStorage.getItem('nras_history');
     if (saved) {
       try {
-        setHistory(JSON.parse(saved));
+        return JSON.parse(saved);
       } catch (e) {
         console.error('Failed to parse neurological history', e);
       }
-    } else {
-      // Seed initial mock scientific data if empty to show dashboard state on first visit
-      const seedData = seedMockData();
-      localStorage.setItem('nras_history', JSON.stringify(seedData));
-      setHistory(seedData);
     }
-  }, []);
+    // Seed initial mock scientific data if empty to show dashboard state on first visit
+    const seedData = seedMockData();
+    localStorage.setItem('nras_history', JSON.stringify(seedData));
+    return seedData;
+  });
 
-  // Update scores whenever history changes
-  useEffect(() => {
+  // Derived scores calculation via useMemo to avoid cascading renders
+  const scores = React.useMemo<PerformanceScores>(() => {
     if (history.length === 0) {
-      setScores({
-        npi: 0,
-        reflex: 0,
-        memory: 0,
-        focus: 0,
-        endurance: 0,
-        cognitive: 0,
-        accuracy: 0,
-      });
-      return;
+      return { npi: 0, reflex: 0, memory: 0, focus: 0, endurance: 0, cognitive: 0, accuracy: 0 };
     }
 
-    // Filter attempts by category
-    const reflexAttempts = history.filter(h => 
-      h.module === 'visual-reflex' || h.module === 'game-catch' || h.module === 'game-pop'
-    );
-    const memoryAttempts = history.filter(h => h.module === 'memory-tile');
-    const focusAttempts = history.filter(h => h.module === 'focus-endurance');
-    const cognitiveAttempts = history.filter(h => 
-      h.module === 'game-stroop' || h.module === 'game-direction'
-    );
-
-    // Calculate sub-scores (default to 50 if no attempts, to indicate baseline)
-    const getAvgScore = (attempts: TestAttempt[], fallback = 60) => {
-      if (attempts.length === 0) return fallback;
-      const sum = attempts.reduce((acc, curr) => acc + curr.score, 0);
-      return Math.round(sum / attempts.length);
+    /**
+     * Each module contributes partial weights to each dimension (0–1).
+     * Weights sum tells how "pure" each module is for a dimension.
+     * E.g. visual-reflex is 100% reflex, game-direction is 50% reflex + 50% cognitive.
+     */
+    type Dim = 'reflex' | 'memory' | 'focus' | 'endurance' | 'cognitive';
+    const moduleContrib: Record<string, Partial<Record<Dim, number>>> = {
+      'visual-reflex':   { reflex: 1.0 },
+      'memory-tile':     { memory: 1.0 },
+      'focus-endurance': { focus: 0.5, endurance: 0.5 },
+      'game-pop':        { reflex: 0.6, cognitive: 0.4 },
+      'game-direction':  { reflex: 0.5, cognitive: 0.5 },
+      'game-stroop':     { cognitive: 0.7, focus: 0.3 },
     };
 
-    const reflex = getAvgScore(reflexAttempts, 70);
-    const memory = getAvgScore(memoryAttempts, 65);
-    const focus = getAvgScore(focusAttempts, 68);
+    // For each dimension: accumulate weighted score sum and total weight
+    const dimAccum: Record<Dim, { wSum: number; wTotal: number }> = {
+      reflex:    { wSum: 0, wTotal: 0 },
+      memory:    { wSum: 0, wTotal: 0 },
+      focus:     { wSum: 0, wTotal: 0 },
+      endurance: { wSum: 0, wTotal: 0 },
+      cognitive: { wSum: 0, wTotal: 0 },
+    };
 
-    // Endurance can be calculated based on focus duration + fatigue index + success rate
-    const endurance = focusAttempts.length > 0 
-      ? Math.round(
-          focusAttempts.reduce((acc, curr) => {
-            const fatigueBonus = curr.rawMetrics.fatigueIndex ? (1 - curr.rawMetrics.fatigueIndex) * 100 : 80;
-            const accuracyWeight = curr.accuracy;
-            return acc + (fatigueBonus * 0.4 + accuracyWeight * 0.6);
-          }, 0) / focusAttempts.length
-        )
-      : 64;
+    history.forEach(h => {
+      const contrib = moduleContrib[h.module];
+      if (!contrib) return;
 
-    const cognitive = getAvgScore(cognitiveAttempts, 66);
-    
-    // Global accuracy is average accuracy of all attempts
-    const accuracy = Math.round(
-      history.reduce((acc, curr) => acc + curr.accuracy, 0) / history.length
-    );
+      // Special endurance calculation for focus-endurance module
+      const effectiveScore = (h.module === 'focus-endurance' && contrib.endurance)
+        ? Math.round(
+            (h.rawMetrics.fatigueIndex != null
+              ? (1 - h.rawMetrics.fatigueIndex) * 100 * 0.4
+              : h.score * 0.4) +
+            h.accuracy * 0.6
+          )
+        : h.score;
 
-    // NPI Formula: NPI = 0.25*Reflex + 0.20*Memory + 0.20*Focus + 0.20*Cognitive + 0.15*Accuracy
-    const npi = Math.round(
-      0.25 * reflex +
-      0.20 * memory +
-      0.20 * focus +
-      0.20 * cognitive +
-      0.15 * accuracy
-    );
-
-    setScores({
-      npi,
-      reflex,
-      memory,
-      focus,
-      endurance,
-      cognitive,
-      accuracy,
+      (Object.keys(contrib) as Dim[]).forEach(dim => {
+        const w = contrib[dim]!;
+        dimAccum[dim].wSum   += effectiveScore * w;
+        dimAccum[dim].wTotal += w;
+      });
     });
+
+    // Compute each dimension avg; 0 if no data at all for that dimension
+    const avg = (dim: Dim) =>
+      dimAccum[dim].wTotal > 0
+        ? Math.round(dimAccum[dim].wSum / dimAccum[dim].wTotal)
+        : 0;
+
+    const reflex    = avg('reflex');
+    const memory    = avg('memory');
+    const focus     = avg('focus');
+    const endurance = avg('endurance');
+    const cognitive = avg('cognitive');
+
+    // Global accuracy = average accuracy across ALL attempts (every module)
+    const accuracy = Math.round(
+      history.reduce((acc, h) => acc + h.accuracy, 0) / history.length
+    );
+
+    /**
+     * NPI formula — dimension weights only count populated dimensions,
+     * so playing only games still gives a fair score rather than being
+     * dragged down by 0-valued unplayed dimensions.
+     */
+    const dimWeights: Record<Dim, number> = {
+      reflex:    0.25,
+      memory:    0.20,
+      focus:     0.20,
+      endurance: 0.10,
+      cognitive: 0.20,
+    };
+    const accuracyWeight = 0.05;
+
+    let npiWeightedSum = accuracy * accuracyWeight;
+    let npiTotalWeight = accuracyWeight;
+
+    (Object.keys(dimWeights) as Dim[]).forEach(dim => {
+      if (dimAccum[dim].wTotal > 0) {
+        npiWeightedSum += avg(dim) * dimWeights[dim];
+        npiTotalWeight += dimWeights[dim];
+      }
+    });
+
+    const npi = Math.min(100, Math.round(npiWeightedSum / npiTotalWeight));
+
+    return { npi, reflex, memory, focus, endurance, cognitive, accuracy };
   }, [history]);
+
 
   const addAttempt = (attempt: Omit<TestAttempt, 'id' | 'timestamp'>) => {
     const newAttempt: TestAttempt = {
@@ -294,12 +304,12 @@ function seedMockData(): TestAttempt[] {
     },
     {
       id: 'mock-9',
-      module: 'game-catch',
+      module: 'game-pop',
       timestamp: generateDate(0),
-      score: 90,
-      accuracy: 96,
-      responseTime: 320,
-      rawMetrics: { caughtCount: 24, missedCount: 1 }
+      score: 88,
+      accuracy: 93,
+      responseTime: 310,
+      rawMetrics: { targetsPopped: 21 }
     },
     {
       id: 'mock-10',

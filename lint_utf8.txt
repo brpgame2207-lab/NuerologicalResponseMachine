@@ -1,0 +1,100 @@
+﻿
+> bioproj@0.0.0 lint
+> eslint .
+
+
+C:\Users\B R PANKAJ KUMAR\OneDrive\Desktop\BioProj\clone\NuerologicalResponseMachine\src\context\ProgressContext.tsx
+   67:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 react-refresh/only-export-components
+  101:9   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\B R PANKAJ KUMAR\OneDrive\Desktop\BioProj\clone\NuerologicalResponseMachine\src\context\ProgressContext.tsx:101:9
+   99 |     if (saved) {
+  100 |       try {
+> 101 |         setHistory(JSON.parse(saved));
+      |         ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  102 |       } catch (e) {
+  103 |         console.error('Failed to parse neurological history', e);
+  104 |       }  react-hooks/set-state-in-effect
+  116:7   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\B R PANKAJ KUMAR\OneDrive\Desktop\BioProj\clone\NuerologicalResponseMachine\src\context\ProgressContext.tsx:116:7
+  114 |   useEffect(() => {
+  115 |     if (history.length === 0) {
+> 116 |       setScores({
+      |       ^^^^^^^^^ Avoid calling setState() directly within an effect
+  117 |         npi: 0,
+  118 |         reflex: 0,
+  119 |         memory: 0,                                           react-hooks/set-state-in-effect
+
+C:\Users\B R PANKAJ KUMAR\OneDrive\Desktop\BioProj\clone\NuerologicalResponseMachine\src\pages\AssessmentCenter.tsx
+  590:38  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+C:\Users\B R PANKAJ KUMAR\OneDrive\Desktop\BioProj\clone\NuerologicalResponseMachine\src\pages\AssessmentCenter.tsx:590:38
+  588 |                 <div>Recall Accuracy: {Math.round((recallResults.filter(r=>r.colorMatched).length / sequence.length)*100)}%</div>
+  589 |                 <div>Pattern Recall: {Math.round((recallResults.filter(r=>r.locationMatched).length / sequence.length)*100)}%</div>
+> 590 |                 <div>Recall Speed: {(totalRecallTimeRef.current / 1000).toFixed(2)}s</div>
+      |                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  591 |               </div>
+  592 |               <button 
+  593 |                 onClick={handleStartGame}  react-hooks/refs
+  811:6   warning  React Hook useEffect has missing dependencies: 'addAttempt', 'duration', 'falseClicks', 'hits', 'latencies', and 'misses'. Either include them or remove the dependency array. If 'addAttempt' changes too often, find the parent component that defines it and wrap that definition in useCallback                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   react-hooks/exhaustive-deps
+
+C:\Users\B R PANKAJ KUMAR\OneDrive\Desktop\BioProj\clone\NuerologicalResponseMachine\src\pages\TrainingArena.tsx
+  280:6   warning  React Hook useEffect has missing dependencies: 'addAttempt', 'caught', and 'missed'. Either include them or remove the dependency array. If 'addAttempt' changes too often, find the parent component that defines it and wrap that definition in useCallback                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  react-hooks/exhaustive-deps
+  479:6   warning  React Hook useEffect has missing dependencies: 'addAttempt', 'latencies', 'missed', and 'popped'. Either include them or remove the dependency array. If 'addAttempt' changes too often, find the parent component that defines it and wrap that definition in useCallback                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     react-hooks/exhaustive-deps
+  489:55  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+C:\Users\B R PANKAJ KUMAR\OneDrive\Desktop\BioProj\clone\NuerologicalResponseMachine\src\pages\TrainingArena.tsx:489:55
+  487 |             <div className="flex space-x-4 text-xs font-mono font-bold bg-black px-2.5 py-1 border border-black shadow-[2px_2px_0px_#000]">
+  488 |               <span className="text-[#00E5FF]">POPPED: {popped}</span>
+> 489 |               <span className="text-slate-400">TIME: {gameTimeLeft.current}s</span>
+      |                                                       ^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  490 |             </div>
+  491 |           )}
+  492 |         </div>    react-hooks/refs
+  639:6   warning  React Hook useEffect has missing dependencies: 'keyMap' and 'nextRound'. Either include them or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    react-hooks/exhaustive-deps
+  667:6   warning  React Hook useEffect has missing dependencies: 'addAttempt', 'correct', 'latencies', and 'totalKeys'. Either include them or remove the dependency array. If 'addAttempt' changes too often, find the parent component that defines it and wrap that definition in useCallback                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 react-hooks/exhaustive-deps
+  676:23  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+C:\Users\B R PANKAJ KUMAR\OneDrive\Desktop\BioProj\clone\NuerologicalResponseMachine\src\pages\TrainingArena.tsx:676:23
+  674 |           {gameState === 'playing' && (
+  675 |             <div className="text-xs font-mono font-bold bg-black px-2.5 py-1 border border-black shadow-[2px_2px_0px_#000]">
+> 676 |               ROUND: {roundCountRef.current} / 20 | CORRECT: {correct}
+      |                       ^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  677 |             </div>
+  678 |           )}
+  679 |         </div>                                                                                              react-hooks/refs
+  851:6   warning  React Hook useEffect has missing dependencies: 'addAttempt', 'correct', 'latencies', and 'totalRounds'. Either include them or remove the dependency array. If 'addAttempt' changes too often, find the parent component that defines it and wrap that definition in useCallback                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               react-hooks/exhaustive-deps
+  864:55  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+C:\Users\B R PANKAJ KUMAR\OneDrive\Desktop\BioProj\clone\NuerologicalResponseMachine\src\pages\TrainingArena.tsx:864:55
+  862 |             <div className="flex space-x-4 text-xs font-mono font-bold bg-black px-2.5 py-1 border border-black shadow-[2px_2px_0px_#000]">
+  863 |               <span className="text-[#00FF88]">CORRECT: {correct}</span>
+> 864 |               <span className="text-slate-400">TIME: {gameTimeLeft.current}s</span>
+      |                                                       ^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  865 |             </div>
+  866 |           )}
+  867 |         </div>  react-hooks/refs
+
+Γ£û 13 problems (7 errors, 6 warnings)
+

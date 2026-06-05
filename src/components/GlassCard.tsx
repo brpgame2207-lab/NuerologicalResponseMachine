@@ -15,16 +15,16 @@ export const GlassCard: React.FC<GlassCardProps> = ({
   onClick,
   hoverEffect = true,
 }) => {
-  const getGlowStyles = () => {
+  const getBrutalistStyles = () => {
     switch (glowColor) {
       case 'cyan':
-        return 'border-cyan-500/20 shadow-[0_0_15px_-3px_rgba(0,229,255,0.1)] hover:border-cyan-400/40 hover:shadow-[0_0_20px_-3px_rgba(0,229,255,0.25)]';
+        return 'border-black bg-[#16161a] shadow-[6px_6px_0px_#00E5FF] hover:shadow-[4px_4px_0px_#00E5FF] active:shadow-[1px_1px_0px_#00E5FF]';
       case 'green':
-        return 'border-emerald-500/20 shadow-[0_0_15px_-3px_rgba(16,185,129,0.1)] hover:border-emerald-400/40 hover:shadow-[0_0_20px_-3px_rgba(16,185,129,0.25)]';
+        return 'border-black bg-[#16161a] shadow-[6px_6px_0px_#00FF88] hover:shadow-[4px_4px_0px_#00FF88] active:shadow-[1px_1px_0px_#00FF88]';
       case 'purple':
-        return 'border-purple-500/20 shadow-[0_0_15px_-3px_rgba(124,58,237,0.1)] hover:border-purple-400/40 hover:shadow-[0_0_20px_-3px_rgba(124,58,237,0.25)]';
+        return 'border-black bg-[#16161a] shadow-[6px_6px_0px_#7C3AED] hover:shadow-[4px_4px_0px_#7C3AED] active:shadow-[1px_1px_0px_#7C3AED]';
       default:
-        return 'border-slate-800/80 shadow-black/40 hover:border-slate-700/80';
+        return 'border-black bg-[#16161a] shadow-[6px_6px_0px_#000000] hover:shadow-[4px_4px_0px_#000000] active:shadow-[1px_1px_0px_#000000]';
     }
   };
 
@@ -32,25 +32,27 @@ export const GlassCard: React.FC<GlassCardProps> = ({
     <div
       onClick={onClick}
       className={`
-        relative overflow-hidden rounded-xl border bg-[#0f172a]/70 backdrop-blur-md p-6
-        transition-all duration-300
+        relative overflow-hidden rounded-none border-[3px] p-6
+        transition-all duration-150 ease-in-out
         ${onClick ? 'cursor-pointer' : ''}
-        ${hoverEffect ? 'hover:-translate-y-1' : ''}
-        ${getGlowStyles()}
+        ${hoverEffect ? 'hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[5px] active:translate-y-[5px]' : ''}
+        ${getBrutalistStyles()}
         ${className}
       `}
     >
-      {/* Dynamic ambient grid background line */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] pointer-events-none" />
+      {/* Dynamic ambient grid background line for techy texture */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000015_1px,transparent_1px),linear-gradient(to_bottom,#00000015_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
       
-      {/* Decorative colored orb corner effects */}
+      {/* Decorative tiny neobrutalist badge/marker */}
       {glowColor !== 'none' && (
         <div className={`
-          absolute -top-12 -right-12 h-24 w-24 rounded-full blur-[40px] pointer-events-none opacity-20 transition-opacity duration-300
-          ${glowColor === 'cyan' ? 'bg-cyan-500' : ''}
-          ${glowColor === 'green' ? 'bg-emerald-500' : ''}
-          ${glowColor === 'purple' ? 'bg-purple-500' : ''}
-        `} />
+          absolute top-0 right-0 w-8 h-8 border-b-[3px] border-l-[3px] border-black flex items-center justify-center font-mono text-[9px] font-bold text-black
+          ${glowColor === 'cyan' ? 'bg-[#00E5FF]' : ''}
+          ${glowColor === 'green' ? 'bg-[#00FF88]' : ''}
+          ${glowColor === 'purple' ? 'bg-[#7C3AED] text-white' : ''}
+        `}>
+          //
+        </div>
       )}
       
       <div className="relative z-10">
