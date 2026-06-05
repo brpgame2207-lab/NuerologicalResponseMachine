@@ -2,7 +2,6 @@ import React from 'react';
 import { 
   BrainCircuit, 
   LineChart, 
-  BookOpen, 
   ChevronRight, 
   Zap, 
   Eye
@@ -51,13 +50,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setActiveTab }) => {
             >
               <span>Start Assessment</span>
               <ChevronRight className="h-5 w-5" />
-            </button>
-            <button 
-              onClick={() => setActiveTab('research')}
-              className="bg-slate-900 hover:bg-slate-850 text-cyan-400 font-semibold px-6 py-3 rounded-lg border border-cyan-500/30 hover:border-cyan-400/50 flex items-center space-x-2 transition-all"
-            >
-              <span>Explore Research Center</span>
-              <BookOpen className="h-5 w-5" />
             </button>
           </div>
         </div>
@@ -142,15 +134,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setActiveTab }) => {
           <p className="text-sm text-slate-400 leading-relaxed">
             By measuring millisecond-level variances under different cognitive conditions, NRAS maps the conduction speed and synapse efficiency in your nervous system.
           </p>
-          <div className="pt-2">
-            <button 
-              onClick={() => setActiveTab('research')}
-              className="text-xs font-semibold text-cyan-400 tracking-wider flex items-center space-x-1 group border-b border-cyan-500/30 pb-0.5 hover:border-cyan-400 transition-all font-mono"
-            >
-              <span>ACCESS RESEARCH DOCUMENTATION</span>
-              <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-            </button>
-          </div>
         </div>
         
         {/* Visual schematic diagram */}

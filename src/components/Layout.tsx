@@ -3,8 +3,6 @@ import {
   Activity, 
   BrainCircuit, 
   LineChart, 
-  Grid3X3, 
-  BookOpen, 
   Menu, 
   X, 
   Cpu, 
@@ -27,8 +25,6 @@ export const Layout: React.FC<LayoutProps> = ({ children, activeTab, setActiveTa
     { id: 'assessments', label: 'Assessment Center', icon: Activity },
     { id: 'training', label: 'Training Arena', icon: BrainCircuit },
     { id: 'analytics', label: 'Analytics Dashboard', icon: LineChart },
-    { id: 'heatmap', label: 'Reaction Heatmap', icon: Grid3X3 },
-    { id: 'research', label: 'Research Center', icon: BookOpen },
   ];
 
   return (

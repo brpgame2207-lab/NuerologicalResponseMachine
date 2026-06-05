@@ -5,8 +5,6 @@ import LandingPage from './pages/LandingPage';
 import AssessmentCenter from './pages/AssessmentCenter';
 import TrainingArena from './pages/TrainingArena';
 import AnalyticsPage from './pages/AnalyticsPage';
-import HeatmapPage from './pages/HeatmapPage';
-import ResearchCenter from './pages/ResearchCenter';
 
 function App() {
   const [activeTab, setActiveTab] = useState<string>('landing');
@@ -21,10 +19,6 @@ function App() {
         return <TrainingArena />;
       case 'analytics':
         return <AnalyticsPage />;
-      case 'heatmap':
-        return <HeatmapPage />;
-      case 'research':
-        return <ResearchCenter />;
       default:
         return <LandingPage setActiveTab={setActiveTab} />;
     }
